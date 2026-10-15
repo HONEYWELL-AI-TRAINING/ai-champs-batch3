@@ -1,54 +1,74 @@
-# Feature Brief — Task Comments
+# Feature Brief — Task Search
 
-This is the **plain-English request** you feed to `/speckit.specify` in Lab 01.
-It is intentionally informal and slightly under-specified — turning it into an
-unambiguous, testable specification is the work of Module 04. Do **not** add
-implementation detail here; that is what `/speckit.plan` is for.
+This is the **plain-English request** you feed to the specify step (`/speckit.specify`,
+or `/speckit-specify` in skills mode) in Lab 01. It is intentionally informal and
+slightly under-specified — turning it into an unambiguous, testable specification
+is the work of Module 04. Do **not** add implementation detail here; that is what
+the plan step is for.
+
+> The previous brief (task comments) is kept as
+> [`comment-feature-brief.md`](comment-feature-brief.md).
 
 ---
 
 ## The ask (as a product owner would phrase it)
 
-Engineers want to discuss a task without leaving the board. Add a lightweight
-**comment thread** to each task.
+Engineers want to find a task without scanning every column. Add a keyword
+**search** to the board.
 
-- On the board, each task card shows a small **comment count** (e.g. 💬 3). It's
-  hidden when there are no comments.
-- Clicking it expands an inline **thread** under the card: the existing comments,
-  oldest at the top, each showing who wrote it and roughly when.
-- Below the thread is a small form: an **author** field and a **comment** box,
-  and a "Post" button.
-- You can **delete** a comment you no longer want. (For now, anyone can delete
-  any comment — no auth in this app yet.)
-- Comments are plain text. Keep them short — a sentence or two, not essays.
-- A comment can't be posted without both an author and some text.
-- Deleting a task should take its comments with it.
+- A **search box** sits next to the existing status filter.
+- As the engineer types a word or phrase, the board narrows to the tasks that
+  match. The count on each column reflects only the tasks that match.
+- A task matches when its **title or description** contains what was typed.
+  Upper/lower case doesn't matter.
+- Search and the **status filter work together** — a task has to satisfy both.
+- Clearing the box (or a small "clear" control) brings the full board back.
+- When nothing matches, the board says so clearly — it must look different from
+  an empty board or an empty column.
+- The board never shows results for something other than what is currently in
+  the box, even if the engineer types quickly.
+- A box that is empty or only spaces means "no search" — not an error.
 
 ## Out of scope (for this feature)
 
-- Editing a comment after posting.
-- Replies / threading / reactions / @-mentions.
-- Rich text, attachments, or Markdown rendering.
-- Any authentication or "who am I" — the author is just typed in.
-- Notifications.
+- Searching comment text.
+- Ranking, fuzzy matching, typo tolerance, or highlighting the matched text.
+- Saved, shared, or bookmarkable searches; remembering a search between visits.
+- Advanced syntax (quotes, AND/OR, `assignee:ana`).
+- Pagination or sorting.
+- Any change to what a task contains or to the database schema.
 
 ## Notes the team already knows (constraints the spec must honour)
 
-- This app owns its schema in one file, `database/schema.sql`. A new table is
-  fine — but it goes there, as a reviewed change. No migration tooling.
-- Every backend (.NET, Python, Java) must expose the feature identically and
-  return byte-identical JSON for the same request (timestamp key casing aside).
+- Search belongs in the existing layers. The React app keeps `components/` →
+  `pages/` → `services/`, with all HTTP in `services/`. Each backend keeps
+  Controller/Router → Service → Repository, with all database access in the
+  repository.
+- Every backend (.NET, Python, Java) must give the **same results, in the same
+  order, with the same status codes** for the same request. The task shape does
+  not change (timestamp key casing aside).
+- Anything the user types is just text. Characters like `%`, `_`, `\` and `'`
+  must not change what the query means or cause an error.
+- With no search, the board and the existing task list behave exactly as today.
 - The existing error contract is `404` for a missing resource, `422` for a bad
-  request body. New endpoints follow it.
-- New behaviour ships with tests in the same layer.
+  request. New behaviour follows it.
+- New behaviour ships with tests in the same layer, in every backend and in the
+  frontend.
 
 ## Open questions the spec should resolve (don't answer them here)
 
-- What exactly is "short"? A hard character limit?
-- What's the max length of an author name?
-- What does `GET` return for a task that doesn't exist — `404`, or `200 []`?
-- Is there a max number of comments per task?
-- What's the response body of `POST` — the new comment, or the whole thread?
-- Newest- or oldest-first in the API response?
+- Should **assignee** be searched too, or only title and description?
+- Is a multi-word search one exact phrase, or must every word appear anywhere?
+- Is there a maximum query length? What happens when it's exceeded?
+- Is there a minimum length — does a single letter count?
+- Is leading/trailing whitespace ignored?
+- Does search run as the user types (and how soon after they stop), or only on
+  Enter / a Search button?
+- What does the API return when nothing matches — `200 []` or `404`?
+- Is the filtering done by the server or in the browser?
+- Does the **Refresh** control keep the current search?
+- What exactly does the "nothing matches" message say, and can the user clear
+  the search from it?
 
-`/speckit.clarify` will walk you through these.
+The clarify step (`/speckit.clarify`, or `/speckit-clarify`) will walk you
+through these.
