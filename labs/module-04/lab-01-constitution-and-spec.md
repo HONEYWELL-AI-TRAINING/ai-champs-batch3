@@ -40,7 +40,7 @@ From `labs/module-01/` (your workspace root):
 **macOS / Linux**
 
 ```bash
-specify init --here --ai copilot --script sh
+specify init --here --integration copilot --script sh
 ```
 
 **Windows (PowerShell)**
