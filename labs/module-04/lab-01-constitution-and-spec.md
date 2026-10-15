@@ -106,8 +106,7 @@ Feed the brief in. Reference the file so Copilot reads the whole thing:
 ```
 /speckit.specify
 
-Build the feature described in labs/module-04/feature-brief.md — a task comment
-thread on the Engineering Task Board. Honour the constitution. Do not decide
+Build the feature described in docs/feature-task-search.md — a task search on the Engineering Task Board. Honour the constitution. Do not decide
 implementation details (framework, table columns beyond the obvious) — that is
 for /speckit.plan.
 ```
