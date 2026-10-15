@@ -46,7 +46,7 @@ specify init --here --integration copilot --script sh
 **Windows (PowerShell)**
 
 ```powershell
-specify init --here --ai copilot --script ps
+specify init --here --integration copilot --script ps
 ```
 
 - `--here` initialises in the current folder (don't create a subfolder).
