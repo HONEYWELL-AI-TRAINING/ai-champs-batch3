@@ -31,7 +31,6 @@
 14. [Module Build Map](#14-module-build-map)
 15. [Grading Rubric / Definition of Done](#15-grading-rubric--definition-of-done)
 16. [Stretch Goals (Optional)](#16-stretch-goals-optional)
-17. [Dependencies and References](#17-dependencies-and-references)
 
 ---
 
@@ -713,25 +712,3 @@ traceability matrix, the brownfield evidence, or the release-readiness self-audi
 - **Energy model** — a first-order kWh estimate per zone from stage/damper commands,
   feeding a real energy-vs-comfort KPI rather than an indicator.
 
----
-
-## 17. Dependencies and References
-
-- `capstone/HVAC_Edge_Air_Quality_Optimizer_Requirements.md` — the embedded-track
-  capstone; source of the `hvac-zone-controller-v1` register map this platform's
-  adapter consumes.
-- `capstone/PlantWatch_Asset_Alarm_Platform_Requirements.md` /
-  `capstone/PlantWatch_Asset_Alarm_Platform_Build_Map.md` — the alternative
-  "PlantWatch" process-automation use case and its build map; structurally parallel to
-  this document.
-- `labs/module-01/` — the lab application whose architecture, layering, schema
-  discipline, and `.github/` customization conventions this capstone extends.
-- `guides/foundation-phase-modules-01-04.md` — spec/plan/tasks templates, the
-  maturity ladder, traceability and change-control conventions.
-- `guides/build-validate-phase-modules-05-08.md` — complete SDLC, brownfield
-  archaeology, test strategy, MCP, PR quality.
-- `courseOutline/NIIT_Honeywell_AI_Champions_GitHub_AgentPrism (Software_Engineering).pdf`
-  — the authoritative 12-module course design.
-- External: ASHRAE 55 (thermal comfort), ASHRAE 62.1 (ventilation), RESET Air / WELL
-  (indoor air quality), ANSI/ISA-18.2 (alarm management), Project Haystack / Brick
-  Schema (equipment tagging), Modbus and BACnet/IP specifications.

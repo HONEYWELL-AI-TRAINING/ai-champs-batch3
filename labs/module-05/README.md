@@ -18,6 +18,13 @@ Task Board codebase, same Spec Kit tooling, same `.github/` layer from Modules
 Work through them in order. Total time: about **3 hours** (the deck budgets 4
 for the full workshop including discussion).
 
+**Alternative brownfield track — OpenSpec.**
+[Lab 04](lab-04-brownfield-soft-delete-with-openspec.md) (~60 min) delivers the
+*same* soft-delete request with **OpenSpec** (propose → apply → archive) and
+compares it with the Spec Kit route of Labs 02–03. Do it instead of Labs 02–03,
+or afterwards from the pre-implementation commit. Needs Node.js 20.19+ and
+`npm install -g @fission-ai/openspec@latest`.
+
 ## The two pieces of work
 
 ### Greenfield (Lab 01) — finish the SDLC for **task comments**
